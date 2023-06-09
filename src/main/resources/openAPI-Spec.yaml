@@ -1,0 +1,267 @@
+openapi: 3.0.3
+info:
+  title: Super Sport Car
+  description: The OpenApi Spec for the BE and FE
+  version: 1.0.0
+servers:
+  - url: 'https://localhost:8080'
+paths:
+  /car:
+    get:
+      tags:
+        - car
+      summary: Get all cars
+      description: Get all cars
+      operationId: getAllCars
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/car'
+        '404':
+          description: Cars not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        '500':
+          description: Critical server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+    post:
+      tags:
+        - car
+      summary: Create a car
+      description: Create a car
+      operationId: createCar
+      requestBody:
+        description: Car object that needs to be added to the store
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/carRequest'
+      responses:
+        '201':
+          description: Car created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/car'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        '500':
+          description: Critical server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+  /car/{carId}:
+    get:
+      tags:
+        - car
+      summary: Get one cars
+      description: Get one cars
+      operationId: getOneCar
+      parameters:
+        - name: carId
+          in: path
+          description: The car id
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/car'
+        '404':
+          description: Car not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        '500':
+          description: Critical server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+    put:
+      tags:
+        - car
+      summary: Update a car
+      description: Update a car
+      operationId: updateCar
+      parameters:
+        - name: carId
+          in: path
+          description: The car id
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        description: Car object that needs to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/carRequest'
+      responses:
+        '200':
+          description: Car updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/car'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        '404':
+          description: Car not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        '500':
+          description: Critical server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+    delete:
+      tags:
+        - car
+      summary: Delete a car
+      description: Delete a car
+      operationId: deleteCar
+      parameters:
+        - name: carId
+          in: path
+          description: The car id
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Car deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        '404':
+          description: Car not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        '500':
+          description: Critical server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+components:
+  schemas:
+    brand:
+      type: object
+      properties:
+        brandId:
+          type: number
+          format: int32
+          example: 1
+        brandName:
+          type: string
+          example: Audi
+    car:
+      type: object
+      properties:
+        carId:
+          type: number
+          format: int32
+          example: 1
+        carName:
+          type: string
+          example: Audi E-Tron
+        carBrand:
+          $ref: "#/components/schemas/brand"
+        carPicture:
+          type: string
+          format: binary
+        carSpeed:
+          type: number
+          format: double
+        carAcceleration:
+          type: number
+          format: double
+        carPrice:
+          type: number
+          multipleOf: 0.01
+        carHorsePower:
+          type: number
+          format: int32
+        carMotorType:
+          type: number
+          format: int32
+        carBuildYear:
+          type: number
+          format: date
+    carRequest:
+      type: object
+      properties:
+        carName:
+          type: string
+          example: Audi E-Tron
+        carBrand:
+          type: number
+          format: int32
+          example: 1
+        carPicture:
+          type: string
+          format: binary
+        carSpeed:
+          type: number
+          format: double
+        carAcceleration:
+          type: number
+          format: double
+        carPrice:
+          type: number
+          multipleOf: 0.01
+        carHorsePower:
+          type: number
+          format: int32
+        carMotorType:
+          type: number
+          format: int32
+        carBuildYear:
+          type: number
+          format: date
+    errorResponse:
+      type: object
+      properties:
+        code:
+          type: number
+          format: int32
+          example: 404
+        message:
+          type: string
+          example: Car not found
