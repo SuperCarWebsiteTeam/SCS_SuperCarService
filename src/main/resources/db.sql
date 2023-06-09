@@ -1,3 +1,5 @@
+SET FOREIGN_KEY_CHECKS = 0;
+
 CREATE DATABASE IF NOT EXISTS `superCarStorage` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 USE `superCarStorage`;
@@ -5,7 +7,7 @@ USE `superCarStorage`;
 CREATE TABLE car(
                     id INT(11) NOT NULL AUTO_INCREMENT,
                     carName VARCHAR(50) NOT NULL,
-                    brand VARCHAR(50) NOT NULL,
+                    brand INT(11) NOT NULL,
                     carPicture LONGBLOB NOT NULL,
                     carSpeed DOUBLE NOT NULL,
                     carAcceleration DOUBLE NOT NULL,
