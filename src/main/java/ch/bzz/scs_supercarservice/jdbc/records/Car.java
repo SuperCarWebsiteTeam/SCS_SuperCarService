@@ -6,49 +6,68 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
 @Getter
 @Setter
 @Entity
-@Table(name = "car")
+@Table(name = "cars")
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @NotNull
+    @Column(name = "city_kpl", nullable = false)
+    private Integer cityKpl;
+
+    @Size(max = 255)
+    @NotNull
+    @Column(name = "class", nullable = false)
+    private String classField;
+
+    @NotNull
+    @Column(name = "combination_kpl", nullable = false)
+    private Integer combinationKpl;
+
+    @NotNull
+    @Column(name = "cylinders", nullable = false)
+    private Integer cylinders;
+
+    @NotNull
+    @Column(name = "displacement", nullable = false)
+    private Float displacement;
+
+    @Size(max = 3)
+    @NotNull
+    @Column(name = "drive", nullable = false, length = 3)
+    private String drive;
+
     @Size(max = 50)
     @NotNull
-    @Column(name = "carName", nullable = false, length = 50)
-    private String carName;
+    @Column(name = "fuel_type", nullable = false, length = 50)
+    private String fuelType;
 
     @NotNull
-    @Column(name = "carPicture", nullable = false)
-    private byte[] carPicture;
+    @Column(name = "highway_kpl", nullable = false)
+    private Integer highwayKpl;
+
+    @Size(max = 50)
+    @NotNull
+    @Column(name = "make", nullable = false, length = 50)
+    private String make;
+
+    @Size(max = 50)
+    @NotNull
+    @Column(name = "model", nullable = false, length = 50)
+    private String model;
+
+    @Size(max = 50)
+    @NotNull
+    @Column(name = "transmission", nullable = false, length = 50)
+    private String transmission;
 
     @NotNull
-    @Column(name = "carSpeed", nullable = false)
-    private Double carSpeed;
-
-    @NotNull
-    @Column(name = "carAcceleration", nullable = false)
-    private Double carAcceleration;
-
-    @NotNull
-    @Column(name = "carPrice", nullable = false)
-    private Double carPrice;
-
-    @NotNull
-    @Column(name = "carMotorType", nullable = false)
-    private Integer carMotorType;
-
-    @NotNull
-    @Column(name = "carBuildYear", nullable = false)
-    private LocalDate carBuildYear;
-
-    @NotNull
-    @Column(name = "price", nullable = false)
-    private Integer price;
+    @Column(name = "year", nullable = false)
+    private Integer year;
 
 }

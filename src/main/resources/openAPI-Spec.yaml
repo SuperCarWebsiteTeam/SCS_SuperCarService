@@ -6,13 +6,105 @@ info:
 servers:
   - url: 'https://localhost:8080'
 paths:
-  /car:
+  /v1/cars:
     get:
       tags:
         - car
       summary: Get all cars
       description: Get all cars
       operationId: getAllCars
+      parameters:
+        - name: make
+          in: query
+          description: vehicle manufacturer (e.g. audi or toyota)
+          required: false
+          schema:
+            type: string
+            default: "-"
+        - name: model
+          in: query
+          description: vehicle model (e.g. a4 or corolla)
+          required: false
+          schema:
+              type: string
+              default: "-"
+        - name: fuel_type
+          in: query
+          description: "type of fuel used. Possible values: gas, diesel, electricity"
+          required: false
+          schema:
+              type: string
+              default: "-"
+        - name: drive
+          in: query
+          description: "drive transmission. Possible values: fwd (front-wheel drive), rwd (rear-wheel drive), awd (all-wheel drive), 4wd (four-wheel drive)."
+          required: false
+          schema:
+              type: string
+              default: "-"
+        - name: cylinders
+          in: query
+          description: "number of cylinders in engine"
+          required: false
+          schema:
+              type: integer
+              default: 0
+        - name: transmission
+          in: query
+          description: "type of transmission. Possible values: m (manual), a (automatic)"
+          required: false
+          schema:
+              type: string
+              default: "-"
+        - name: year
+          in: query
+          description: "year of production"
+          required: false
+          schema:
+              type: integer
+              default: 0
+        - name: min_city_kpl
+          in: query
+          description: "minimum city fuel consumption (kilometers per liter)"
+          required: false
+          schema:
+              type: number
+              default: 0
+        - name: max_city_kpl
+          in: query
+          description: "maximum city fuel consumption (kilometers per liter)"
+          required: false
+          schema:
+              type: number
+              default: 0
+        - name: min_highway_kpl
+          in: query
+          description: "minimum highway fuel consumption (kilometers per liter)"
+          required: false
+          schema:
+              type: number
+              default: 0
+        - name: max_highway_kpl
+          in: query
+          description: "maximum highway fuel consumption (kilometers per liter)"
+          required: false
+          schema:
+              type: number
+              default: 0
+        - name: min_comb_kpl
+          in: query
+          description: "minimum combined fuel consumption (kilometers per liter)"
+          required: false
+          schema:
+              type: number
+              default: 0
+        - name: max_comb_kpl
+          in: query
+          description: "maximum combined fuel consumption (kilometers per liter)"
+          required: false
+          schema:
+              type: number
+              default: 0
       responses:
         '200':
           description: Successful operation
@@ -34,227 +126,58 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/errorResponse'
-    post:
-      tags:
-        - car
-      summary: Create a car
-      description: Create a car
-      operationId: createCar
-      requestBody:
-        description: Car object that needs to be added to the store
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/carRequest'
-      responses:
-        '201':
-          description: Car created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/car'
-        '400':
-          description: Invalid input
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errorResponse'
-        '500':
-          description: Critical server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errorResponse'
-  /car/{carId}:
-    get:
-      tags:
-        - car
-      summary: Get one cars
-      description: Get one cars
-      operationId: getOneCar
-      parameters:
-        - name: carId
-          in: path
-          description: The car id
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/car'
-        '404':
-          description: Car not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errorResponse'
-        '500':
-          description: Critical server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errorResponse'
-    put:
-      tags:
-        - car
-      summary: Update a car
-      description: Update a car
-      operationId: updateCar
-      parameters:
-        - name: carId
-          in: path
-          description: The car id
-          required: true
-          schema:
-            type: integer
-            format: int32
-      requestBody:
-        description: Car object that needs to be updated
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/carRequest'
-      responses:
-        '200':
-          description: Car updated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/car'
-        '400':
-          description: Invalid input
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errorResponse'
-        '404':
-          description: Car not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errorResponse'
-        '500':
-          description: Critical server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errorResponse'
-    delete:
-      tags:
-        - car
-      summary: Delete a car
-      description: Delete a car
-      operationId: deleteCar
-      parameters:
-        - name: carId
-          in: path
-          description: The car id
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: Car deleted
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errorResponse'
-        '404':
-          description: Car not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errorResponse'
-        '500':
-          description: Critical server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errorResponse'
+
 components:
   schemas:
-    brand:
-      type: object
-      properties:
-        brandId:
-          type: number
-          format: int32
-          example: 1
-        brandName:
-          type: string
-          example: Audi
     car:
       type: object
       properties:
-        carId:
+        id:
           type: number
           format: int32
           example: 1
-        carName:
-          type: string
-          example: Audi E-Tron
-        carBrand:
-          $ref: "#/components/schemas/brand"
-        carPicture:
-          type: string
-          format: binary
-        carSpeed:
-          type: number
-          format: double
-        carAcceleration:
-          type: number
-          format: double
-        carPrice:
-          type: number
-          multipleOf: 0.01
-        carHorsePower:
-          type: number
-          format: int32
-        carMotorType:
-          type: number
-          format: int32
-        carBuildYear:
-          type: number
-          format: date
-    carRequest:
-      type: object
-      properties:
-        carName:
-          type: string
-          example: Audi E-Tron
-        carBrand:
+        city_kpl:
           type: number
           format: int32
           example: 1
-        carPicture:
+        class:
           type: string
-          format: binary
-        carSpeed:
-          type: number
-          format: double
-        carAcceleration:
-          type: number
-          format: double
-        carPrice:
-          type: number
-          multipleOf: 0.01
-        carHorsePower:
+          example: midsize car
+        combination_kpl:
           type: number
           format: int32
-        carMotorType:
+          example: 1
+        cylinders:
           type: number
           format: int32
-        carBuildYear:
+          example: 4
+        displacement:
           type: number
-          format: date
+          format: float
+          example: 2.2
+        drive:
+          type: string
+          example: fwd
+        fuel_type:
+          type: string
+          example: gas
+        highway_kpl:
+          type: number
+          format: int32
+          example: 1
+        make:
+          type: string
+          example: toyota
+        model:
+          type: string
+          example: camry
+        transmission:
+          type: string
+          example: a
+        year:
+          type: number
+          format: int32
+          example: 2012
     errorResponse:
       type: object
       properties:
