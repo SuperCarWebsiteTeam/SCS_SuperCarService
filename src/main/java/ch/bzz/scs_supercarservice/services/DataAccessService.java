@@ -2,7 +2,6 @@ package ch.bzz.scs_supercarservice.services;
 
 import ch.bzz.scs_supercarservice.jdbc.repository.CarRepository;
 import com.scs.gen.v1.module.Car;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,8 +16,8 @@ public class DataAccessService {
         this.carRepository = carRepository;
     }
 
-    public List<Car> getCars(Integer cityKpl, String classField, Integer combinationKpl, Integer cylinders, Float displacement, String drive, String fuelType, Integer highwayKpl, String make, String model, String transmission, Integer year, Integer limit) {
-        List<ch.bzz.scs_supercarservice.jdbc.records.Car> cars = carRepository.findByCityKplAndClassFieldAndCombinationKplAndCylindersAndDisplacementAndDriveAndFuelTypeAndHighwayKplAndMakeAndModelAndTransmissionAndYear(cityKpl, classField, combinationKpl, cylinders, displacement, drive, fuelType, highwayKpl, make, model, transmission, year, Pageable.ofSize(limit));
+    public List<Car> getCars(String fuelType, String make, String model, Integer year) {
+        List<ch.bzz.scs_supercarservice.jdbc.records.Car> cars = carRepository.findByFuelTypeAndMakeAndModelLikeAndYear(fuelType, make, model, year);
         List<Car> responseCars = new ArrayList<>();
         for (ch.bzz.scs_supercarservice.jdbc.records.Car car: cars) {
             Car responseCar = new Car();

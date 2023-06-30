@@ -35,27 +35,6 @@ paths:
           schema:
               type: string
               default: "-"
-        - name: drive
-          in: query
-          description: "drive transmission. Possible values: fwd (front-wheel drive), rwd (rear-wheel drive), awd (all-wheel drive), 4wd (four-wheel drive)."
-          required: false
-          schema:
-              type: string
-              default: "-"
-        - name: cylinders
-          in: query
-          description: "integer of cylinders in engine"
-          required: false
-          schema:
-              type: integer
-              default: 0
-        - name: transmission
-          in: query
-          description: "type of transmission. Possible values: m (manual), a (automatic)"
-          required: false
-          schema:
-              type: string
-              default: "-"
         - name: year
           in: query
           description: "year of production"
@@ -63,55 +42,6 @@ paths:
           schema:
               type: integer
               default: 0
-        - name: min_city_kpl
-          in: query
-          description: "minimum city fuel consumption (kilometers per liter)"
-          required: false
-          schema:
-              type: integer
-              default: 0
-        - name: max_city_kpl
-          in: query
-          description: "maximum city fuel consumption (kilometers per liter)"
-          required: false
-          schema:
-              type: integer
-              default: 0
-        - name: min_highway_kpl
-          in: query
-          description: "minimum highway fuel consumption (kilometers per liter)"
-          required: false
-          schema:
-              type: integer
-              default: 0
-        - name: max_highway_kpl
-          in: query
-          description: "maximum highway fuel consumption (kilometers per liter)"
-          required: false
-          schema:
-              type: integer
-              default: 0
-        - name: min_comb_kpl
-          in: query
-          description: "minimum combined fuel consumption (kilometers per liter)"
-          required: false
-          schema:
-              type: integer
-              default: 0
-        - name: max_comb_kpl
-          in: query
-          description: "maximum combined fuel consumption (kilometers per liter)"
-          required: false
-          schema:
-              type: integer
-              default: 0
-        - name: limit
-          in: query
-          description: "maximum integer of results"
-          required: false
-          schema:
-              type: integer
-              default: 5
       responses:
         '200':
           description: Successful operation
