@@ -44,7 +44,7 @@ paths:
               default: "-"
         - name: cylinders
           in: query
-          description: "number of cylinders in engine"
+          description: "integer of cylinders in engine"
           required: false
           schema:
               type: integer
@@ -68,46 +68,46 @@ paths:
           description: "minimum city fuel consumption (kilometers per liter)"
           required: false
           schema:
-              type: number
+              type: integer
               default: 0
         - name: max_city_kpl
           in: query
           description: "maximum city fuel consumption (kilometers per liter)"
           required: false
           schema:
-              type: number
+              type: integer
               default: 0
         - name: min_highway_kpl
           in: query
           description: "minimum highway fuel consumption (kilometers per liter)"
           required: false
           schema:
-              type: number
+              type: integer
               default: 0
         - name: max_highway_kpl
           in: query
           description: "maximum highway fuel consumption (kilometers per liter)"
           required: false
           schema:
-              type: number
+              type: integer
               default: 0
         - name: min_comb_kpl
           in: query
           description: "minimum combined fuel consumption (kilometers per liter)"
           required: false
           schema:
-              type: number
+              type: integer
               default: 0
         - name: max_comb_kpl
           in: query
           description: "maximum combined fuel consumption (kilometers per liter)"
           required: false
           schema:
-              type: number
+              type: integer
               default: 0
         - name: limit
           in: query
-          description: "maximum number of results"
+          description: "maximum integer of results"
           required: false
           schema:
               type: integer
@@ -140,22 +140,22 @@ components:
       type: object
       properties:
         id:
-          type: number
+          type: integer
           format: int32
           example: 1
         city_kpl:
-          type: number
+          type: integer
           format: int32
           example: 1
         class:
           type: string
           example: midsize car
         combination_kpl:
-          type: number
+          type: integer
           format: int32
           example: 1
         cylinders:
-          type: number
+          type: integer
           format: int32
           example: 4
         displacement:
@@ -169,7 +169,7 @@ components:
           type: string
           example: gas
         highway_kpl:
-          type: number
+          type: integer
           format: int32
           example: 1
         make:
@@ -182,14 +182,14 @@ components:
           type: string
           example: a
         year:
-          type: number
+          type: integer
           format: int32
           example: 2012
     errorResponse:
       type: object
       properties:
         code:
-          type: number
+          type: integer
           format: int32
           example: 404
         message:
