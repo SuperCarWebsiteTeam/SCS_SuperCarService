@@ -12,8 +12,10 @@ import java.util.List;
 public interface CarRepository extends JpaRepository<Car, Integer>, JpaSpecificationExecutor<Car> {
     @Query("""
             select c from Car c
-            where c.cityKpl = :cityKpl and c.classField = :classField and c.combinationKpl = :combinationKpl and c.cylinders = :cylinders and c.displacement = :displacement and c.drive = :drive and c.fuelType = :fuelType and c.highwayKpl = :highwayKpl and c.make = :make and c.model = :model and c.transmission = :transmission and c.year = :year""")
-    List<Car> findByCityKplAndClassFieldAndCombinationKplAndCylindersAndDisplacementAndDriveAndFuelTypeAndHighwayKplAndMakeAndModelAndTransmissionAndYear(@Param("cityKpl") Integer cityKpl, @Param("classField") String classField, @Param("combinationKpl") Integer combinationKpl, @Param("cylinders") Integer cylinders, @Param("displacement") Float displacement, @Param("drive") String drive, @Param("fuelType") String fuelType, @Param("highwayKpl") Integer highwayKpl, @Param("make") String make, @Param("model") String model, @Param("transmission") String transmission, @Param("year") Integer year, Pageable pageable);
+            where c.cityKpl between :cityKplStart and :cityKplEnd and c.classField = :classField and c.combinationKpl between :combinationKplStart and :combinationKplEnd and c.cylinders = :cylinders and c.displacement = :displacement and c.drive = :drive and c.fuelType = :fuelType and c.highwayKpl between :highwayKplStart and :highwayKplEnd and c.make = :make and c.model = :model and c.transmission = :transmission and c.year = :year""")
+    List<Car> findByCityKplBetweenAndClassFieldAndCombinationKplBetweenAndCylindersAndDisplacementAndDriveAndFuelTypeAndHighwayKplBetweenAndMakeAndModelAndTransmissionAndYear(@Param("cityKplStart") Integer cityKplStart, @Param("cityKplEnd") Integer cityKplEnd, @Param("classField") String classField, @Param("combinationKplStart") Integer combinationKplStart, @Param("combinationKplEnd") Integer combinationKplEnd, @Param("cylinders") Integer cylinders, @Param("displacement") Float displacement, @Param("drive") String drive, @Param("fuelType") String fuelType, @Param("highwayKplStart") Integer highwayKplStart, @Param("highwayKplEnd") Integer highwayKplEnd, @Param("make") String make, @Param("model") String model, @Param("transmission") String transmission, @Param("year") Integer year, Pageable pageable);
+
+
 
 
 
